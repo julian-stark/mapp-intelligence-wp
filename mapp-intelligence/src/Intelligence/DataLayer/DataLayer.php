@@ -79,6 +79,10 @@ class Datalayer
 			$this->filter_datalayer($filter_keys, $this->datalayer);
 		}
 		$this->decode_datalayer($this->datalayer);
+		
+		// Allow modification of datalayer before it's exposed
+		$this->datalayer = apply_filters('mapp_datalayer_before_create', $this->datalayer);
+		
 		if ($config["General"]["v"] === 5) {
 			echo "<script>";
 			echo "window._ti = " . json_encode($this->datalayer) . ";";
